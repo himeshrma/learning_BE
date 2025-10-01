@@ -44,6 +44,19 @@ app.get(
   }
 );
 
+app.get("/about", (req, res) => {
+  res.send("This is the about page");
+});
+app.get("/profile", (req, res) => {
+  res.send("This is the profile page");
+});
+
+app.post("/get-form-data", (req, res) => {
+  console.log(req.body);
+  //res.send("Form data received");
+});
+
+//RAED
 app.get("/get-users", (req, res) => {
   userModel
     .findOne({
@@ -55,16 +68,20 @@ app.get("/get-users", (req, res) => {
     });
 });
 
-app.get("/about", (req, res) => {
-  res.send("This is the about page");
-});
-app.get("/profile", (req, res) => {
-  res.send("This is the profile page");
-});
-
-app.post("/get-form-data", (req, res) => {
-  console.log(req.body);
-  //res.send("Form data received");
+//UDATE
+app.get("/update-user", async (req, res) => {
+  await userModel
+    .findOneAndUpdate(
+      {
+        username: "a",
+      },
+      {
+        email: "updated_email@example.com",
+      }
+    )
+    .then(() => {
+      res.send("User updated");
+    });
 });
 
 app.listen(3000);
