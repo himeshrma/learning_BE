@@ -21,6 +21,15 @@ app.use(express.static("public"));
 app.get("/register", (req, res) => {
   res.render("register");
 });
+app.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
+  const newUser = await userModel.create({
+    username: username,
+    email: email,
+    password: password,
+  });
+  res.send(newUser);
+});
 
 app.get(
   "/",
