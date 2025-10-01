@@ -43,6 +43,18 @@ app.get(
     res.render("index");
   }
 );
+
+app.get("/get-users", (req, res) => {
+  userModel
+    .findOne({
+      username: "a",
+    })
+    .then((usr) => {
+      res.send(usr);
+      console.log(usr);
+    });
+});
+
 app.get("/about", (req, res) => {
   res.send("This is the about page");
 });
@@ -52,7 +64,7 @@ app.get("/profile", (req, res) => {
 
 app.post("/get-form-data", (req, res) => {
   console.log(req.body);
-  res.send("Form data received");
+  //res.send("Form data received");
 });
 
 app.listen(3000);
